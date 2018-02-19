@@ -1,6 +1,8 @@
 import uuid
 
 from django.db import models
+from django.contrib.postgres.fields import JSONField
+
 
 
 class DateModel(models.Model):
@@ -54,3 +56,21 @@ class Currency(DateModel):
 
     def __str__(self):
         return str(self.code)
+
+
+class Join(DateModel):
+    email = models.EmailField()
+    group = models.CharField(max_length=20)
+    share_id = models.CharField(max_length=20)
+
+
+class Campaign(DateModel):
+    start_date = models.DateTimeField()
+    end_date = models.DateTimeField()
+    rewards = JSONField(default=dict)
+    status = models.BooleanField(default=True)
+    volume = models.IntegerField()
+    limit = models.IntegerField()
+
+
+

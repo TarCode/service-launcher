@@ -3,8 +3,10 @@ import uuid
 from rehive import Rehive, APIException
 from rest_framework import serializers
 from django.db import transaction
+from django.contrib.postgres.fields import JSONField
 
-from launcher_service.models import Company, User, Currency
+
+from launcher_service.models import Company, User, Currency, Join, Campaign
 
 
 class ActivateSerializer(serializers.Serializer):
@@ -99,6 +101,16 @@ class DeactivateSerializer(serializers.Serializer):
         # Cascade delete to rmeove the company and other children entities.
         self.validated_data['company'].admin.delete()
 
+class JoinSerializer(serializers.ModelSerializer):
+
+    email = serializers.EmailField()
+    group = serializers.CharField()
+    share_id = serializers.CharField()
+
+    class Meta:
+        model = Join
+        fields = ('email', 'group', 'share_id')
+
 
 class AdminCompanySerializer(serializers.ModelSerializer):
     identifier = serializers.CharField(read_only=True)
@@ -115,5 +127,20 @@ class CurrencySerializer(serializers.ModelSerializer):
     class Meta:
         model = Currency
         fields = (
-            'code', 'description', 'symbol', 'unit', 'divisibility', 'enabled',
+            'code', 'description', 'symbol', 'unit',
+            'divisibility', 'enabled',
         )
+
+
+class CampaignSerializer(serializers.ModelSerializer):
+    start_date = serializers.DateTimeField()
+    end_date = serializers.DateTimeField()
+    rewards = JSONField(default=dict)
+    status = serializers.BooleanField(default=True)
+    volume = serializers.IntegerField()
+    limit = serializers.IntegerField()
+
+    class Meta:
+        model = Campaign
+        fields = ('start_date', 'end_date', 'rewards', 'status',
+                  'volume', 'limit')

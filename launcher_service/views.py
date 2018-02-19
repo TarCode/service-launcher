@@ -10,10 +10,7 @@ from rest_framework.decorators import api_view, permission_classes
 
 from launcher_service.pagination import ResultsSetPagination
 from launcher_service.authentication import AdminAuthentication
-from launcher_service.serializers import (
-    ActivateSerializer, DeactivateSerializer, AdminCompanySerializer,
-    CurrencySerializer
-)
+from launcher_service.serializers import *
 from launcher_service.models import Currency
 
 logger = getLogger('django')
@@ -79,6 +76,7 @@ class ActivateView(GenericAPIView):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
+
         return Response(
             {'status': 'success', 'data': serializer.data},
             status=status.HTTP_201_CREATED
@@ -95,6 +93,20 @@ class DeactivateView(GenericAPIView):
         serializer.is_valid(raise_exception=True)
         serializer.delete()
         return Response({'status': 'success'})
+
+
+class JoinView(GenericAPIView):
+    allowed_methods = ('POST',)
+    permission_classes = (AllowAny, )
+    serializer_class = JoinSerializer
+
+    def post(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(
+            {'status': 'success', 'data': serializer.data},
+            status=status.HTTP_201_CREATED)
 
 
 class AdminCompanyView(GenericAPIView):
@@ -133,6 +145,30 @@ class AdminCurrencyView(GenericAPIView):
         try:
             currency = Currency.objects.get(company=company, code__iexact=code)
         except Currency.DoesNotExist:
+            raise exceptions.NotFound()
+
+        serializer = self.get_serializer(currency)
+        return Response({'status': 'success', 'data': serializer.data})
+
+
+class AdminCampaignView(GenericAPIView):
+    allowed_methods = ('GET', 'POST',)
+    authentication_classes = (AdminAuthentication,)
+    serializer_class = CampaignSerializer
+
+    def post(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(
+            {'status': 'success', 'data': serializer.data},
+            status=status.HTTP_201_CREATED)
+
+    def get(self, request, *args, **kwargs):
+
+        try:
+            currency = Campaign.objects.filter()
+        except Campaign.DoesNotExist:
             raise exceptions.NotFound()
 
         serializer = self.get_serializer(currency)
