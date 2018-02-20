@@ -101,6 +101,7 @@ class DeactivateSerializer(serializers.Serializer):
         # Cascade delete to rmeove the company and other children entities.
         self.validated_data['company'].admin.delete()
 
+
 class JoinSerializer(serializers.ModelSerializer):
 
     email = serializers.EmailField()
@@ -128,8 +129,7 @@ class CurrencySerializer(serializers.ModelSerializer):
         model = Currency
         fields = (
             'code', 'description', 'symbol', 'unit',
-            'divisibility', 'enabled',
-        )
+            'divisibility', 'enabled')
 
 
 class CampaignSerializer(serializers.ModelSerializer):
