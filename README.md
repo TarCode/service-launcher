@@ -86,3 +86,26 @@ travis encrypt HEROKU_AUTH_TOKEN="$(heroku auth:token)" --add
 ``` 
 - Commit and push the changes to master to trigger the first build
 # service-launcher
+
+# Launcher Dashboard
+
+Make sure you have `nodejs` and `yarn` or `npm` installed
+### `cd launcher_dashboard`
+###	 `yarn install` or `npm install`
+### `yarn start` or `npm start`
+
+Runs the app in the development mode.<br>
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+The page will reload if you make edits.<br>
+You will also see any lint errors in the console.
+
+###  `yarn build` or `npm run build`
+
+Builds the app for production to the `build` folder.<br>
+It correctly bundles React in production mode and optimizes the build for the best performance.
+
+The build is minified and the filenames include the hashes.<br>
+The app is ready to be deployed!
+
+This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
