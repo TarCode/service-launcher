@@ -13,6 +13,8 @@ admin.autodiscover()
 urlpatterns = (
     # Dashboard
 		url(r'^$', TemplateView.as_view(template_name='home.html')),
+		url(r'^wallet/', TemplateView.as_view(template_name='wallet.html')),
+		url(r'^market/', TemplateView.as_view(template_name='market.html')),
     url(r'^dashboard/', include(admin.site.urls)),
     # Views
     url(r'^api/', include('launcher_service.urls', namespace='launcher_service')),

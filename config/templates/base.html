@@ -15,10 +15,12 @@
 	<header>
 		<nav class="green darken-2">
 			<div class="nav-wrapper">
-				<a href="#" class="brand-logo">Launcher</a>
-				<ul id="nav-mobile" class="right hide-on-med-and-down">
+				<a href="/" class="brand-logo center">Launcher</a>
+				<ul id="nav-mobile" class="right hide-on-large-and-up">
 					<li>
-						<a href="sass.html">Sass</a>
+						<a href="#" data-activates="slide-out" class="button-collapse">
+							<i class="material-icons">menu</i>
+						</a>
 					</li>
 				</ul>
 			</div>
@@ -27,37 +29,33 @@
 	<ul id="slide-out" class="side-nav fixed">
 		<li>
 			<div class="user-view">
-				<div class="background">
-					<!-- <img src="https://edit-express.deviantart.com/art/Avatar-Angelina-189182691"> -->
-					<span>Image here</span>
-				</div>
+				<!-- <div class="background">
+					<img src="{% static 'avatar.jpeg' %}">
+				</div> -->
 				<a href="#!user">
-					<!-- <img class="circle" src="https://edit-express.deviantart.com/art/Avatar-Angelina-189182691"> -->
-					<span>Image here</span>
+					<img class="circle" src="{% static 'avatar.jpeg' %}">
+
 				</a>
 				<a href="#!name">
-					<span class="white-text name">John Doe</span>
+					<span class="black-text name">John Doe</span>
 				</a>
 				<a href="#!email">
-					<span class="white-text email">jdandturk@gmail.com</span>
+					<span class="black-text email">jdandturk@gmail.com</span>
 				</a>
 			</div>
 		</li>
 		<li>
-			<a href="#!">
-				<i class="material-icons">cloud</i>First Link With Icon</a>
+			<a href="/">
+				<!-- <i class="material-icons">cloud</i> -->
+				Home</a>
 		</li>
 		<li>
-			<a href="#!">Second Link</a>
+			<a href="/wallet">
+				<!-- <i class="material-icons">cloud</i> -->
+				Wallet</a>
 		</li>
 		<li>
-			<div class="divider"></div>
-		</li>
-		<li>
-			<a class="subheader">Subheader</a>
-		</li>
-		<li>
-			<a class="waves-effect" href="#!">Third Link With Waves</a>
+			<a href="/market">Market</a>
 		</li>
 	</ul>
 	 <main>
@@ -66,6 +64,8 @@
 	<!--Import jQuery before materialize.js-->
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+	<script rel="stylesheet" src="{% static 'main.js' %}"></script>
+
 </body>
 
 </html>
